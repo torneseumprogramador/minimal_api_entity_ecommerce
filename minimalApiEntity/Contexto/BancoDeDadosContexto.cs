@@ -7,13 +7,12 @@ public class BancoDeDadosContexto : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("");
-    }
+        IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        // Configurações adicionais do modelo, se necessário
+        optionsBuilder.UseNpgsql(configuration.GetConnectionString("conexao"));
     }
-
     public DbSet<Cliente> Clientes { get; set; } = default!;
 }
