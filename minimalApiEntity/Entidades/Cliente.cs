@@ -3,21 +3,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entity.Entidades;
 
-[Table("tb_clientes")]
+[Table("clientes")]
 public record Cliente
 {
     [Key]
+    [Column(name: "id")]
     public int Id { get; set; }
 
     [Required]
     [MaxLength(100)]
-    [Column(name: "cli_nome")]
+    [Column(name: "nome")]
     public string Nome { get; set; } = string.Empty;
 
     [Required]
     [MaxLength(20)]
-    [Column(name: "cli_telefone")]
+    [Column(name: "telefone")]
     public string Telefone { get; set; } = string.Empty;
 
+    [Column(name: "observacao")]
     public string? Observacao { get; set; }
 }
