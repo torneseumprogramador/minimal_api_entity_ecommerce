@@ -1,10 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,visualstudiocode,windows,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,visualstudiocode,windows,linux
 
-### App Settings ###
-appsettings.Development.json
-appsettings.json
-
 ### Linux ###
 *~
 
