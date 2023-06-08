@@ -23,7 +23,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var dbContext = app.Services.GetRequiredService<BancoDeDadosContexto>();
+using var scope = app.Services.CreateScope(); 
+var dbContext = scope.ServiceProvider.GetRequiredService<BancoDeDadosContexto>();
 new ClienteRoute(app, dbContext).Register();
 
 app.Run();
