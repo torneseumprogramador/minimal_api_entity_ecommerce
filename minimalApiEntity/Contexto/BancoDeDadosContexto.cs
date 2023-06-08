@@ -14,7 +14,7 @@ public class BancoDeDadosContexto : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        // #1 - Caso não tenha sido configurado na classe Program ele entra no if
+        // #1 - Configuração mais utilizada em aplicações windows/console
         if (!optionsBuilder.IsConfigured)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()

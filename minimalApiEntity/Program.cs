@@ -1,4 +1,5 @@
 using Entity.Contexto;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// #2 - Configurando a conexão através de injeção de dependência
+// #2 - Configurando a conexão através de injeção de dependência - Estratégia mais utilizada webapi
+// É injetado através do ([FromServices] BancoDeDadosContexto contexto)
 builder.Services.AddDbContext<BancoDeDadosContexto>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("conexao"));
@@ -25,12 +27,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () =>
+app.MapGet("/", ([FromServices] BancoDeDadosContexto contexto) =>
 {
-    return new
-    {
-        Mensagem = "Hello World!"
-    };
+    return contexto.Clientes.ToList();
 })
 .WithName("Home")
 .WithOpenApi();
