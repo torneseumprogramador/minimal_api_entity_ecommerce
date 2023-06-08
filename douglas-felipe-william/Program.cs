@@ -25,6 +25,9 @@ app.UseHttpsRedirection();
 
 using var scope = app.Services.CreateScope(); 
 var dbContext = scope.ServiceProvider.GetRequiredService<BancoDeDadosContexto>();
-new ClienteRoute(app, dbContext).Register();
+new ClientesRoutes(app, dbContext).Register();
+new ProdutosRoutes(app, dbContext).Register();
+new PedidosRoutes(app, dbContext).Register();
+new PedidosProdutosRoutes(app, dbContext).Register();
 
 app.Run();

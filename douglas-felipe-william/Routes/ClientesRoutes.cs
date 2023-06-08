@@ -4,12 +4,12 @@ using douglas_felipe_william.Models;
 
 namespace douglas_felipe_william.Routes;
 
-class ClienteRoute
+class ClientesRoutes
 {
     private readonly WebApplication _app;
     private readonly BancoDeDadosContexto _dbContext;
 
-    public ClienteRoute(WebApplication app, BancoDeDadosContexto dbContext)
+    public ClientesRoutes(WebApplication app, BancoDeDadosContexto dbContext)
     {
         _app = app;
         _dbContext = dbContext;
