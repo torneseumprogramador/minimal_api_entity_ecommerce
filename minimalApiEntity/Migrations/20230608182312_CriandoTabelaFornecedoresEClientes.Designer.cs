@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace minimalApiEntity.Migrations
 {
     [DbContext(typeof(BancoDeDadosContexto))]
-    [Migration("20230608035353_AdicionandoTabelaDeClientes")]
-    partial class AdicionandoTabelaDeClientes
+    [Migration("20230608182312_CriandoTabelaFornecedoresEClientes")]
+    partial class CriandoTabelaFornecedoresEClientes
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,15 +34,48 @@ namespace minimalApiEntity.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("cli_nome");
+
+                    b.Property<string>("Observacao")
                         .HasColumnType("text");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("cli_telefone");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("tb_clientes");
+                });
+
+            modelBuilder.Entity("Entity.Entidades.Fornecedor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("Observacao")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Fornecedores");
                 });
 #pragma warning restore 612, 618
         }

@@ -26,5 +26,12 @@ public class BancoDeDadosContexto : DbContext
         }
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+    }
+
     public DbSet<Cliente> Clientes { get; set; } = default!;
+    public DbSet<Fornecedor> Fornecedores { get; set; } = default!;
+
 }
