@@ -29,10 +29,16 @@ app.UseHttpsRedirection();
 
 app.MapGet("/", ([FromServices] BancoDeDadosContexto contexto) =>
 {
-    return contexto.Clientes.ToList();
+    var clientes = contexto.Clientes.ToList();
+
+    if (clientes.Count == 0)
+    {
+        return Results.NotFound(new { Mensagem = "Clientes não encontrados" });
+    }
+
+    return Results.Ok(clientes);
 })
 .WithName("Home")
 .WithOpenApi();
-
 
 app.Run();
