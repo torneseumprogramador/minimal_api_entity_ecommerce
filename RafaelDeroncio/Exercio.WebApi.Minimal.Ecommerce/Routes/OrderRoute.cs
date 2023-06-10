@@ -13,7 +13,7 @@ public class OrderRoute
 
     public void Register()
     {
-        _app.MapGet("/order", GetAllOrders)
+        _app.MapGet("/orders", GetAllOrders)
             .WithName("Orders")
             .WithOpenApi();
 

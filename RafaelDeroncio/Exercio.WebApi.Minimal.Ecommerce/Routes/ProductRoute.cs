@@ -13,7 +13,7 @@ public class ProductRoute
 
     public void Register()
     {
-        _app.MapGet("/product", GetAllProducts)
+        _app.MapGet("/products", GetAllProducts)
             .WithName("Products")
             .WithOpenApi();
 
