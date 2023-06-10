@@ -1,3 +1,6 @@
+using Exercio.WebApi.Minimal.Ecommerce.Configurations.DTOs;
+using Exercio.WebApi.Minimal.Ecommerce.Requests;
+using Exercio.WebApi.Minimal.Ecommerce.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Exercio.WebApi.Minimal.Ecommerce.Routes;
@@ -5,10 +8,16 @@ namespace Exercio.WebApi.Minimal.Ecommerce.Routes;
 public class CustomerRoute
 {
     private readonly WebApplication _app;
+    private readonly ICustomerService _customerService; 
 
     public CustomerRoute(WebApplication app)
     {
         _app = app;
+    }
+
+    public CustomerRoute(ICustomerService customerService)
+    {
+        _customerService = customerService;
     }
 
     public void Register()
@@ -34,28 +43,28 @@ public class CustomerRoute
             .WithOpenApi();
     }
 
-    private object GetAllCustomers()
+    private IEnumerable<CustomerDTO> GetAllCustomers()
     {
-        return null;
+        return _customerService.GetAllCustomers();
     }
 
-    private object GetCustomerById(int id)
+    private CustomerDTO GetCustomerById(int id)
     {
-        return 1;
+        return _customerService.GetCustomerById(id);
     }
 
-    private object RegisterCustomer([FromBody] object customer)
+    private CustomerDTO RegisterCustomer([FromBody] CustomerRequest customer)
     {
-        return customer;
+        return _customerService.CreateCustomer(customer);
     }
 
-    private object UpdateCustomer(int id, [FromBody] object customer)
+    private bool UpdateCustomer(int id, [FromBody] CustomerRequest customer)
     {
-        return customer;
+        return _customerService.UpdateCustomer(id, customer);
     }
 
-    private object DeleteCustomer(int id)
+    private bool DeleteCustomer(int id)
     {
-        return id;
+        return _customerService.DeleteCustomer(id);
     }
 }
