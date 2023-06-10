@@ -1,4 +1,4 @@
-using Exercio.WebApi.Minimal.Ecommerce.Configurations.DTOs;
+using Exercio.WebApi.Minimal.Ecommerce.Models;
 using Exercio.WebApi.Minimal.Ecommerce.Requests;
 
 namespace Exercio.WebApi.Minimal.Ecommerce.Services.Interfaces;
@@ -13,20 +13,20 @@ public interface IProductService
     /// </summary>
     /// <param name="productId">The ID of the product.</param>
     /// <returns>The product with the specified ID.</returns>
-    ProductDTO GetProductById(int productId);
+    ProductModel GetProductById(int productId);
 
     /// <summary>
     /// Retrieves all products.
     /// </summary>
     /// <returns>A collection of all products.</returns>
-    IEnumerable<ProductDTO> GetAllProducts();
+    IEnumerable<ProductModel> GetAllProducts();
 
     /// <summary>
     /// Creates a new product.
     /// </summary>
     /// <param name="product">The product request object with the product details.</param>
     /// <returns>The created product.</returns>
-    ProductDTO CreateProduct(ProductRequest product);
+    ProductModel CreateProduct(ProductRequest product);
 
     /// <summary>
     /// Updates an existing product.

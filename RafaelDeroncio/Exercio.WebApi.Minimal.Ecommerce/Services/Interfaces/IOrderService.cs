@@ -1,4 +1,4 @@
-using Exercio.WebApi.Minimal.Ecommerce.Configurations.DTOs;
+using Exercio.WebApi.Minimal.Ecommerce.Models;
 using Exercio.WebApi.Minimal.Ecommerce.Requests;
 
 namespace Exercio.WebApi.Minimal.Ecommerce.Services.Interfaces;
@@ -13,20 +13,20 @@ public interface IOrderService
     /// </summary>
     /// <param name="orderId">The ID of the order.</param>
     /// <returns>The order with the specified ID.</returns>
-    OrderDTO GetOrderById(int orderId);
+    OrderModel GetOrderById(int orderId);
 
     /// <summary>
     /// Retrieves all orders.
     /// </summary>
     /// <returns>A collection of all orders.</returns>
-    IEnumerable<OrderDTO> GetAllOrders();
+    IEnumerable<OrderModel> GetAllOrders();
 
     /// <summary>
     /// Creates a new order.
     /// </summary>
     /// <param name="order">The order request object with the order details.</param>
     /// <returns>The created order.</returns>
-    OrderDTO CreateOrder(OrderRequest order);
+    OrderModel CreateOrder(OrderRequest order);
 
     /// <summary>
     /// Updates an existing order.
