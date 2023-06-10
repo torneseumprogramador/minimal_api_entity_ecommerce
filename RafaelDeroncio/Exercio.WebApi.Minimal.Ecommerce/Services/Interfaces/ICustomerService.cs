@@ -1,4 +1,5 @@
 using Exercio.WebApi.Minimal.Ecommerce.Configurations.DTOs;
+using Exercio.WebApi.Minimal.Ecommerce.Models;
 using Exercio.WebApi.Minimal.Ecommerce.Requests;
 
 namespace Exercio.WebApi.Minimal.Ecommerce.Services.Interfaces;
@@ -13,20 +14,20 @@ public interface ICustomerService
     /// </summary>
     /// <param name="customerId">The ID of the customer.</param>
     /// <returns>The customer with the specified ID.</returns>
-    CustomerDTO GetCustomerById(int customerId);
+    CustomerModel GetCustomerById(int customerId);
 
     /// <summary>
     /// Retrieves all customers.
     /// </summary>
     /// <returns>A collection of all customers.</returns>
-    IEnumerable<CustomerDTO> GetAllCustomers();
+    IEnumerable<CustomerModel> GetAllCustomers();
 
     /// <summary>
     /// Creates a new customer.
     /// </summary>
     /// <param name="customer">The customer request object with the customer details.</param>
     /// <returns>The created customer.</returns>
-    CustomerDTO CreateCustomer(CustomerRequest customer);
+    CustomerModel CreateCustomer(CustomerRequest customer);
 
     /// <summary>
     /// Updates an existing customer.

@@ -1,4 +1,5 @@
 using Exercio.WebApi.Minimal.Ecommerce.Configurations.DTOs;
+using Exercio.WebApi.Minimal.Ecommerce.Models;
 using Exercio.WebApi.Minimal.Ecommerce.Requests;
 using Exercio.WebApi.Minimal.Ecommerce.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -8,16 +9,9 @@ namespace Exercio.WebApi.Minimal.Ecommerce.Routes;
 public class CustomerRoute
 {
     private readonly WebApplication _app;
-    private readonly ICustomerService _customerService; 
-
     public CustomerRoute(WebApplication app)
     {
         _app = app;
-    }
-
-    public CustomerRoute(ICustomerService customerService)
-    {
-        _customerService = customerService;
     }
 
     public void Register()
@@ -43,28 +37,28 @@ public class CustomerRoute
             .WithOpenApi();
     }
 
-    private IEnumerable<CustomerDTO> GetAllCustomers()
+    private IEnumerable<CustomerModel> GetAllCustomers([FromServices] ICustomerService customerService)
     {
-        return _customerService.GetAllCustomers();
+        return customerService.GetAllCustomers();
     }
 
-    private CustomerDTO GetCustomerById(int id)
+    private CustomerModel GetCustomerById(int id, [FromServices] ICustomerService customerService)
     {
-        return _customerService.GetCustomerById(id);
+        return customerService.GetCustomerById(id);
     }
 
-    private CustomerDTO RegisterCustomer([FromBody] CustomerRequest customer)
+    private CustomerModel RegisterCustomer([FromBody] CustomerRequest customer, [FromServices] ICustomerService customerService)
     {
-        return _customerService.CreateCustomer(customer);
+        return customerService.CreateCustomer(customer);
     }
 
-    private bool UpdateCustomer(int id, [FromBody] CustomerRequest customer)
+    private bool UpdateCustomer(int id, [FromBody] CustomerRequest customer, [FromServices] ICustomerService customerService)
     {
-        return _customerService.UpdateCustomer(id, customer);
+        return customerService.UpdateCustomer(id, customer);
     }
 
-    private bool DeleteCustomer(int id)
+    private bool DeleteCustomer(int id, [FromServices] ICustomerService customerService)
     {
-        return _customerService.DeleteCustomer(id);
+        return customerService.DeleteCustomer(id);
     }
 }

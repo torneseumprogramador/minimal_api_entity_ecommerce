@@ -8,14 +8,14 @@ using Microsoft.EntityFrameworkCore;
 // Add services to the container.
 var builder = WebApplication.CreateBuilder(args);
 
+// Add Services
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+
 // Configure DbContext Sqlite
 builder.Services.AddDbContext<EcommerceDatabaseContext>(
     options => options.UseSqlite(builder.Configuration.GetConnectionString("SqliteConnection", true)));
-
-// Add Services
-builder.Services.AddSingleton<ICustomerService, CustomerService>();
-builder.Services.AddSingleton<IProductService, ProductService>();
-builder.Services.AddSingleton<IOrderService, OrderService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
