@@ -15,10 +15,6 @@ public class CustomerModel
 
     [Required]
     [Column(TypeName = "TEXT")]
-    public DateTime BirthDate { get; set; }
-
-    [Required]
-    [Column(TypeName = "TEXT")]
     public string PhoneNumber { get; set; }
 
     [Required]

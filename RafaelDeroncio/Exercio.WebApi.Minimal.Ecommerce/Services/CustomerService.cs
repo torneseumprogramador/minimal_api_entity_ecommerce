@@ -27,7 +27,6 @@ public class CustomerService : ICustomerService
         CustomerModel newCustomer = new()
         {
             Name = customer.Name,
-            BirthDate = customer.BirthDate,
             PhoneNumber = customer.PhoneNumber,
             Email = customer.Email,
             IdentificationDoc = customer.IdentificationDoc,
@@ -61,7 +60,6 @@ public class CustomerService : ICustomerService
             {
                 Id = c.Id,
                 Name = c.Name,
-                BirthDate = c.BirthDate,
                 PhoneNumber = c.PhoneNumber,
                 Email = c.Email,
                 IdentificationDoc = c.IdentificationDoc,
@@ -81,7 +79,6 @@ public class CustomerService : ICustomerService
             {
                 Id = c.Id,
                 Name = c.Name,
-                BirthDate = c.BirthDate,
                 PhoneNumber = c.PhoneNumber,
                 Email = c.Email,
                 IdentificationDoc = c.IdentificationDoc,
@@ -101,7 +98,6 @@ public class CustomerService : ICustomerService
         CustomerModel updatedCustomer = new()
         {
             Name = customer.Name,
-            BirthDate = customer.BirthDate,
             PhoneNumber = customer.PhoneNumber,
             Email = customer.Email,
             IdentificationDoc = customer.IdentificationDoc,

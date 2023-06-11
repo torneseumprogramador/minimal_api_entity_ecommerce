@@ -3,6 +3,7 @@ using System;
 using Exercio.WebApi.Minimal.Ecommerce.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Exercio.WebApi.Minimal.Ecommerce.Migrations
 {
     [DbContext(typeof(EcommerceDatabaseContext))]
-    partial class EcommerceDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230611190946_remove campo birthdate")]
+    partial class removecampobirthdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.5");
