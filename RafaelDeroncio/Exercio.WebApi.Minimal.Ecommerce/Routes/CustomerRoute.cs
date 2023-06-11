@@ -37,10 +37,14 @@ public class CustomerRoute
             .WithOpenApi();
     }
 
-    private IEnumerable<CustomerModel> GetAllCustomers([FromServices] ICustomerService customerService)
-    {
-        return customerService.GetAllCustomers();
-    }
+private IEnumerable<CustomerModel> GetAllCustomers([FromServices] ICustomerService customerService, HttpContext context)
+{
+    int pageNumber = Convert.ToInt32(context.Request.Query["pageNumber"]);
+    int pageSize = Convert.ToInt32(context.Request.Query["pageSize"]);
+
+    return customerService.GetAllCustomers(pageNumber, pageSize);
+}
+
 
     private CustomerModel GetCustomerById(int id, [FromServices] ICustomerService customerService)
     {

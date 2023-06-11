@@ -52,10 +52,15 @@ public class CustomerService : ICustomerService
         return _databaseContext.SaveChanges() > 0;
     }
 
-    public IEnumerable<CustomerModel> GetAllCustomers()
+    public IEnumerable<CustomerModel> GetAllCustomers(int pageNumber, int pageSize)
     {
+        pageNumber = pageNumber > 0 ? pageNumber : 1;   
+        pageSize = pageSize > 0 ? pageSize : 5;
+
         return _databaseContext.Customers
             .OrderBy(x => x.Id)
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
             .Select(c => new CustomerModel
             {
                 Id = c.Id,
@@ -69,6 +74,7 @@ public class CustomerService : ICustomerService
             .AsNoTracking()
             .ToList();
     }
+
 
 
     public CustomerModel GetCustomerById(int customerId)

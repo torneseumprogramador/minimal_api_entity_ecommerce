@@ -20,7 +20,7 @@ public interface ICustomerService
     /// Retrieves all customers.
     /// </summary>
     /// <returns>A collection of all customers.</returns>
-    IEnumerable<CustomerModel> GetAllCustomers();
+    IEnumerable<CustomerModel> GetAllCustomers(int pageNumber, int pageSize);
 
     /// <summary>
     /// Creates a new customer.
