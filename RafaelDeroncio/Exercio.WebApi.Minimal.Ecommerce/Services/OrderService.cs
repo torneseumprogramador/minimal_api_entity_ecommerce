@@ -3,9 +3,6 @@ using Exercio.WebApi.Minimal.Ecommerce.Models;
 using Exercio.WebApi.Minimal.Ecommerce.Requests;
 using Exercio.WebApi.Minimal.Ecommerce.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Exercio.WebApi.Minimal.Ecommerce.Services
 {
@@ -51,35 +48,29 @@ namespace Exercio.WebApi.Minimal.Ecommerce.Services
             return _databaseContext.SaveChanges() > 0;
         }
 
-        public IEnumerable<OrderModel> GetAllOrders()
+        public IEnumerable<OrderModel> GetAllOrders(int pageNumber, int pageSize)
         {
-            return _databaseContext.Orders
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+            pageSize = pageSize > 0 ? pageSize : 5;
+
+            var query = _databaseContext.Orders
                 .OrderBy(x => x.Id)
-                .Select(o => new OrderModel
-                {
-                    Id = o.Id,
-                    CustomerId = o.CustomerId,
-                    OrderDate = o.OrderDate,
-                    TotalAmount = o.TotalAmount
-                })
-                .AsNoTracking()
-                .ToList();
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .AsNoTracking();
+
+            return query.ToList();
         }
+
 
         public OrderModel GetOrderById(int orderId)
         {
             return _databaseContext.Orders
                 .Where(o => o.Id == orderId)
-                .Select(o => new OrderModel
-                {
-                    Id = o.Id,
-                    CustomerId = o.CustomerId,
-                    OrderDate = o.OrderDate,
-                    TotalAmount = o.TotalAmount
-                })
                 .AsNoTracking()
                 .FirstOrDefault();
         }
+
 
         public bool UpdateOrder(int id, OrderRequest order)
         {

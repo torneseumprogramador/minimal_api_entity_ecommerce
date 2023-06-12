@@ -1,3 +1,6 @@
+using Exercio.WebApi.Minimal.Ecommerce.Models;
+using Exercio.WebApi.Minimal.Ecommerce.Requests;
+using Exercio.WebApi.Minimal.Ecommerce.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Exercio.WebApi.Minimal.Ecommerce.Routes;
@@ -34,28 +37,31 @@ public class OrderRoute
             .WithOpenApi();
     }
 
-    private object GetAllOrders()
+    private IEnumerable<OrderModel> GetAllOrders([FromServices] IOrderService orderService, HttpContext context)
     {
-        return null;
+        int pageNumber = Convert.ToInt32(context.Request.Query["pageNumber"]);
+        int pageSize = Convert.ToInt32(context.Request.Query["pageSize"]);
+
+        return orderService.GetAllOrders(pageNumber, pageSize);
     }
 
-    private object GetOrderById(int id)
+    private OrderModel GetOrderById(int id, [FromServices] IOrderService orderService)
     {
-        return null;
+        return orderService.GetOrderById(id);
     }
 
-    private object CreateOrder([FromBody] object order)
+    private OrderModel CreateOrder([FromBody] OrderRequest order, [FromServices] IOrderService orderService)
     {
-        return order;
+        return orderService.CreateOrder(order);
     }
 
-    private object UpdateOrder(int id, [FromBody] object order)
+    private bool UpdateOrder(int id, [FromBody] OrderRequest order, [FromServices] IOrderService orderService)
     {
-        return order;
+        return orderService.UpdateOrder(id, order);
     }
 
-    private object DeleteOrder(int id)
+    private bool DeleteOrder(int id, [FromServices] IOrderService orderService)
     {
-        return id;
+        return orderService.DeleteOrder(id);
     }
 }

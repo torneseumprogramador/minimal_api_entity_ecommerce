@@ -19,7 +19,7 @@ public interface IOrderService
     /// Retrieves all orders.
     /// </summary>
     /// <returns>A collection of all orders.</returns>
-    IEnumerable<OrderModel> GetAllOrders();
+    IEnumerable<OrderModel> GetAllOrders(int pageNumber, int pageSize);
 
     /// <summary>
     /// Creates a new order.

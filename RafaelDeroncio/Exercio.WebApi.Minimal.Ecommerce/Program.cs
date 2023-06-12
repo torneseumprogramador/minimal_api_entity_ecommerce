@@ -4,6 +4,7 @@ using Exercio.WebApi.Minimal.Ecommerce.Routes;
 using Exercio.WebApi.Minimal.Ecommerce.Services;
 using Exercio.WebApi.Minimal.Ecommerce.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 // Add services to the container.
 var builder = WebApplication.CreateBuilder(args);
