@@ -36,5 +36,5 @@ public class BancoDeDadosContexto : DbContext
     public DbSet<Pedido> Pedidos { get; set; } = default!;
     public DbSet<Produto> Produtos { get; set; } = default!;
     public DbSet<PedidoProduto> PedidosProdutos { get; set; } = default!;
-
+    public DbSet<Teste> Teste { get; set; } = default!;
 }
