@@ -1,3 +1,6 @@
+using Exercio.WebApi.Minimal.Ecommerce.Models;
+using Exercio.WebApi.Minimal.Ecommerce.Requests;
+using Exercio.WebApi.Minimal.Ecommerce.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Exercio.WebApi.Minimal.Ecommerce.Routes;
@@ -34,28 +37,31 @@ public class ProductRoute
             .WithOpenApi();
     }
 
-    private object GetAllProducts()
+    private IEnumerable<ProductModel> GetAllProducts([FromServices] IProductService productService, HttpContext context)
     {
-        return null;
+        int pageNumber = Convert.ToInt32(context.Request.Query["pageNumber"]);
+        int pageSize = Convert.ToInt32(context.Request.Query["pageSize"]);
+
+        return productService.GetAllProducts(pageNumber, pageSize);
     }
 
-    private object GetProductById(int id)
+    private ProductModel GetProductById(int id, [FromServices] IProductService productService)
     {
-        return null;
+        return productService.GetProductById(id);
     }
 
-    private object CreateProduct([FromBody] object product)
+    private ProductModel CreateProduct([FromBody] ProductRequest product, [FromServices] IProductService productService)
     {
-        return product;
+        return productService.CreateProduct(product);
     }
 
-    private object UpdateProduct(int id, [FromBody] object product)
+    private bool UpdateProduct(int id, [FromBody] ProductRequest product, [FromServices] IProductService productService)
     {
-        return product;
+        return productService.UpdateProduct(id, product);
     }
 
-    private object DeleteProduct(int id)
+    private bool DeleteProduct(int id, [FromServices] IProductService productService)
     {
-        return id;
+        return productService.DeleteProduct(id);
     }
 }

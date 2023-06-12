@@ -19,7 +19,7 @@ public interface IProductService
     /// Retrieves all products.
     /// </summary>
     /// <returns>A collection of all products.</returns>
-    IEnumerable<ProductModel> GetAllProducts();
+    IEnumerable<ProductModel> GetAllProducts(int pageNumber, int pageSize);
 
     /// <summary>
     /// Creates a new product.

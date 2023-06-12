@@ -50,16 +50,22 @@ namespace Exercio.WebApi.Minimal.Ecommerce.Services
             return _databaseContext.SaveChanges() > 0;
         }
 
-        public IEnumerable<ProductModel> GetAllProducts()
+        public IEnumerable<ProductModel> GetAllProducts(int pageNumber, int pageSize)
         {
+            pageNumber = pageNumber > 0 ? pageNumber : 1;
+            pageSize = pageSize > 0 ? pageSize : 5;
+
             return _databaseContext.Products
                 .OrderBy(x => x.Id)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .Select(p => new ProductModel
                 {
                     Id = p.Id,
                     Name = p.Name,
                     Price = p.Price
                 })
+                
                 .AsNoTracking()
                 .ToList();
         }
